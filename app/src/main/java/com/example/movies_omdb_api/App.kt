@@ -2,6 +2,7 @@ package com.example.movies_omdb_api
 
 import android.app.Activity
 import android.app.Application
+import com.example.movies_omdb_api.di.component.DaggerAppComponent
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
@@ -14,5 +15,9 @@ class App : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+        DaggerAppComponent.builder()
+            .application(this)
+            .build()
+            .inject(this)
     }
 }
